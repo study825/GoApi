@@ -1,0 +1,6 @@
+[database]
+    dirver = "mysql"
+[mysql]
+    databaseName ="staiapi"
+    databaseUserName ="root"
+    databasePassword =""
