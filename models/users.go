@@ -25,7 +25,7 @@ func (Users) TableName() string {
 }
 
 func GetUsers(name string) Users {
-	fmt.Println(name)
+	fmt.Printf(name)
 	u := Users{}
 	database.DB.First(&u)
 	// if err := database.DB.Where("name = ?", 234).First(&u).Error; err != nil {
