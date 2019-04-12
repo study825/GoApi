@@ -3,8 +3,7 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"fmt"
-	"time"
-	"iris/database"
+	"GoApi/database"
 )
 
 
@@ -12,11 +11,8 @@ type Users struct {
 	gorm.Model
 
 	ID	int
-	Name string
+	Username string
 	Password string
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt time.Time
 }
 
 func (Users) TableName() string {
@@ -34,12 +30,18 @@ func GetUsers(name string) Users {
 	return u
 }
 
-func CreateUser(username string,password string) Users {
-	user := Users{Name: username, Password: password, CreatedAt: time.Now()}
+func CreateUser(username string,password string) (users *Users){
+	//user := Users{Username: username, Password: password}
 
-	database.DB.Create(&user)
+	users = new(Users)
+	users.Username = username
+	users.Password = password
 
-	return user
+	if err := database.DB.Create(users).Error;err != nil {
+		fmt.Printf("CreateUserErr:%s", err)
+	}
+
+	return users
 }
 
 

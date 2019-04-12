@@ -2,7 +2,7 @@ package main
 
 import (
 	// "iris/models"
-	"iris/controllers"
+	"GoApi/controllers"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/router"
 	"github.com/iris-contrib/middleware/cors"
@@ -37,8 +37,9 @@ func newApp() (api *iris.Application){
 	{
 		v1.PartyFunc("/users", func(users router.Party) {
 			// 根据账号密码获取access_token
-			users.Post("/create", controllers.CreateUser)
-			users.Get("/access_token", controllers.In)
+			//users.Get("/access_token", controllers.In)
+			users.Post("/create", controllers.Create)
+
 		})
 		
 	}

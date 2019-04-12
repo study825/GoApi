@@ -14,7 +14,7 @@ func UserLogin(ctx iris.Context) {
 	
 }
 
-func CreateUser(ctx iris.Context) {
+func Create(ctx iris.Context) {
 	username := ctx.FormValue("username")
 	password := ctx.FormValue("password")
 
