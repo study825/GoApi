@@ -24,6 +24,7 @@ func newApp() (api *iris.Application){
 	// api.PartyFunc("/users", func(users router.Party) {
 	// 	roles.Get("/", controllers.index)
 	// })
+
 	crs := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"}, // allows everything, use that to change the hosts.
 		AllowedMethods:   []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
@@ -36,8 +37,10 @@ func newApp() (api *iris.Application){
 	{
 		v1.PartyFunc("/users", func(users router.Party) {
 			// 根据账号密码获取access_token
+			users.Post("/create", controllers.CreateUser)
 			users.Get("/access_token", controllers.In)
 		})
+		
 	}
 
 

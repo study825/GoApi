@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"iris/models"
+	"GoApi/models"
 	"github.com/kataras/iris"
 )
 
