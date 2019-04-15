@@ -36,10 +36,9 @@ func newApp() (api *iris.Application){
 	v1 := api.Party("/v1", crs).AllowMethods(iris.MethodOptions)
 	{
 		v1.PartyFunc("/users", func(users router.Party) {
-			// 根据账号密码获取access_token
-			//users.Get("/access_token", controllers.In)
-			users.Post("/create", controllers.Create)
-
+			users.Get("/list", controllers.UserList)
+			users.Post("/create", controllers.CreateUser)
+			users.Put("/user/{id}",controllers.UpdateUser)
 		})
 		
 	}

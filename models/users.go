@@ -1,16 +1,15 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
-	"fmt"
 	"GoApi/database"
+	"fmt"
+	"github.com/jinzhu/gorm"
 )
-
 
 type Users struct {
 	gorm.Model
 
-	ID	int
+	ID       int
 	Username string
 	Password string
 }
@@ -30,22 +29,24 @@ func GetUsers(name string) Users {
 	return u
 }
 
-func CreateUser(username string,password string) (users *Users){
-	//user := Users{Username: username, Password: password}
+func CreateUser(username string, password string) (bool, error) {
+	user := Users{Username: username, Password: password}
 
-	users = new(Users)
-	users.Username = username
-	users.Password = password
-
-	if err := database.DB.Create(users).Error;err != nil {
+	if err := database.DB.Create(user).Error; err != nil {
 		fmt.Printf("CreateUserErr:%s", err)
+		return false, err;
+	} else {
+		return true, nil;
 	}
-
-	return users
 }
 
+func UserList(companyId int64) Users {
+	userList := Users{}
 
+	database.DB.Where("company_id",companyId).Find(&userList)
 
+	return userList
+}
 /**
  * 判断用户是否登录
  * @method CheckLogin
@@ -97,7 +98,7 @@ func CreateUser(username string,password string) (users *Users){
  * @method UserAdminCheckLogin
  * @param  {[type]}       username string [description]
  */
- func UserAdminCheckLogin(username string) Users {
+func UserAdminCheckLogin(username string) Users {
 	u := Users{}
 	if err := database.DB.Where("username = ?", username).First(&u).Error; err != nil {
 		fmt.Printf("UserAdminCheckLoginErr:%s", err)

@@ -5,24 +5,36 @@ import (
 	"github.com/kataras/iris"
 )
 
-
-func UserLogin(ctx iris.Context) {
-	// username := ctx.FormValue("username")
-	// password := ctx.FormValue("password")
-
-	// response, status, msg := models.CheckLogin(username,password)
-	
-}
-
-func Create(ctx iris.Context) {
+func CreateUser(ctx iris.Context) {
 	username := ctx.FormValue("username")
 	password := ctx.FormValue("password")
 
-	res := models.CreateUser(username,password)
+	res, err := models.CreateUser(username,password)
+
+	if res != false {
+		ctx.JSON(iris.Map{
+			"message": "success",
+		})
+	}else {
+		ctx.JSON(iris.Map{
+			"message": err,
+		})
+	}
+	
+	return
+}
+
+func UserList(ctx iris.Context)  {
+	companyId := ctx.Values().Get("company_id").(int64)
+
+	res := models.UserList(companyId)
 
 	ctx.JSON(iris.Map{
-		"messageL": res,
+		"data": res,
 	})
-
 	return
+}
+
+func UpdateUser(ctx iris.Context) {
+
 }
