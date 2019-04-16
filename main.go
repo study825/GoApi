@@ -38,7 +38,7 @@ func newApp() (api *iris.Application){
 		v1.PartyFunc("/users", func(users router.Party) {
 			users.Get("/list", controllers.UserList)
 			users.Post("/create", controllers.CreateUser)
-			users.Put("/user/{id}",controllers.UpdateUser)
+			//users.Put("/user/{company_id}",controllers.UpdateUser)
 		})
 		
 	}
