@@ -25,7 +25,7 @@ func CreateUser(ctx iris.Context) {
 }
 
 func UserList(ctx iris.Context)  {
-	companyId,_ := ctx.Params().GetInt64("company_id")
+	companyId,_ := ctx.URLParamInt ("company_id")
 
 	res := models.UserList(companyId)
 

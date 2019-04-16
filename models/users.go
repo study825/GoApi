@@ -37,10 +37,10 @@ func CreateUser(username string, password string) (bool, error) {
 	}
 }
 
-func UserList(companyId int64) Users {
+func UserList(companyId int) Users {
 	userList := Users{}
 
-	database.DB.Where("company_id",companyId).Find(&userList)
+	database.DB.Where("company_id = ?",companyId).Find(&userList)
 
 	return userList
 }
