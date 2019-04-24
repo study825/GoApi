@@ -1,4 +1,6 @@
 # go-api
+
+#### dev 为开发环境 master 为稳定环境
 ####使用iris 框架，gorm，使用MySQL 数据库。
 
 #####gorm 中文文档 http://gorm.book.jasperxu.com
